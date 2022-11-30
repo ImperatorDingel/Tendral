@@ -6,7 +6,7 @@
     <a href=""><img src="https://img.shields.io/badge/IP:-127.0.0.1-red" /></a>
     <a href=""><img src="https://img.shields.io/badge/License:-MIT-green" /></a>
     <br/>
-    <a href="https://discord.gg/ZzD2G56aj9"><img src="https://img.shields.io/badge/Discord:-Click_me-green" /></a>
+    <a href="https://discord.gg/ZzD2G56aj9"><img src="https://img.shields.io/discord/482040355470966784?label=Discord&logo=discord" /></a>
     <a href="https://www.twitch.tv/justdingel"><img src="https://img.shields.io/badge/Twitch:-JustDingel-purple" /></a>
     <a href="https://twitter.com/JustDingel"><img src="https://img.shields.io/badge/Twitter:-JustDingel-blue" /></a>
     <br/>
