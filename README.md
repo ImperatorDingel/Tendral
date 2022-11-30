@@ -8,6 +8,7 @@
     <br/>
     <a href="https://discord.gg/ZzD2G56aj9"><img src="https://img.shields.io/badge/Discord:-Click_me-green" /></a>
     <a href="https://www.twitch.tv/justdingel"><img src="https://img.shields.io/badge/Twitch:-JustDingel-purple" /></a>
+    <a href="https://twitter.com/JustDingel"><img src="https://img.shields.io/badge/Twitter:-JustDingel-blue" /></a>
     <br/>
     <div>Minecraft Server im Rpg Stil</div>
 </div>
