@@ -13,6 +13,7 @@ FishingFarm:
         # Fischnamen gebung
         - if <context.item> == <item[cod]>:
             # TODO: Item Scripts für Fische
+            # TODO: Käsekuchen 2
             - random:
                 - define name Karpfen
                 - define name Flussbarsch
@@ -87,8 +88,8 @@ metric_number2:
     - define length <[number].abs.log[10].round>
     - foreach <script.data_key[data]> key:div as:suffix:
         - if <[length]> >= <[div].length.sub[1]>:
-            - determine <[number].div[<[div]>].round_to[2]><&sp><[suffix]>
-    - determine <[number]>
+            - determine <[number].div[<[div]>].round_to[2]><[suffix]>
+    - determine <[number].div[1000].round_to[2]>kg
 #Cm -> M umrechnung Metric
 metric_number3:
     type: procedure
