@@ -3,7 +3,7 @@ CropFarm:
     events:
         #Farm Skill on level 5 right clicking crops
         after player right clicks block:
-        - if <player.flag[Profil.Skills.Farming.Level]> >= 5:
+        - if <player.flag[<player.flag[Profil]>.Skills.Farming.Level]> >= 5:
             - if <context.location.material.age> == <context.location.material.maximum_age>:
                 - choose <context.location.material.name>:
                     - case potatoes:
@@ -13,7 +13,7 @@ CropFarm:
                         - define xpliste 0
                         - repeat <[drop]>:
                         # level berechnung
-                            - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level]>]>
+                            - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level]>]>
                         # Größen berechnung
                             - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -48,7 +48,7 @@ CropFarm:
                             - define list <[list].include[<[item]>]>
                             - define xpliste:+:<[xp]>
                         - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                        - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                        - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                         - adjustblock <context.location> age:0
                         - drop <[list]> <context.location>
                     - case carrots:
@@ -58,7 +58,7 @@ CropFarm:
                         - define xpliste 0
                         - repeat <[drop]>:
                         # level berechnung
-                            - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level]>]>
+                            - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level]>]>
                         # Größen berechnung
                             - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -93,7 +93,7 @@ CropFarm:
                             - define list <[list].include[<[item]>]>
                             - define xpliste:+:<[xp]>
                         - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                        - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                        - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                         - adjustblock <context.location> age:0
                         - drop <[list]> <context.location>
                     - case wheat:
@@ -103,7 +103,7 @@ CropFarm:
                         - define xpliste 0
                         - repeat <[drop]>:
                         # level berechnung
-                            - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level]>]>
+                            - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level]>]>
                         # Größen berechnung
                             - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -138,7 +138,7 @@ CropFarm:
                             - define list <[list].include[<[item]>]>
                             - define xpliste:+:<[xp]>
                         - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                        - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                        - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                         - adjustblock <context.location> age:0
                         - drop <[list]> <context.location>
                     - case beetroots:
@@ -148,7 +148,7 @@ CropFarm:
                         - define xpliste 0
                         - repeat <[drop]>:
                         # level berechnung
-                            - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level]>]>
+                            - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level]>]>
                         # Größen berechnung
                             - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -183,7 +183,7 @@ CropFarm:
                             - define list <[list].include[<[item]>]>
                             - define xpliste:+:<[xp]>
                         - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                        - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                        - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                         - adjustblock <context.location> age:0
                         - drop <[list]> <context.location>
                     - case cocoa:
@@ -193,7 +193,7 @@ CropFarm:
                         - define xpliste 0
                         - repeat <[drop]>:
                         # level berechnung
-                            - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level]>]>
+                            - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level]>]>
                         # Größen berechnung
                             - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -228,7 +228,7 @@ CropFarm:
                             - define list <[list].include[<[item]>]>
                             - define xpliste:+:<[xp]>
                         - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                        - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                        - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                         - adjustblock <context.location> age:0
                         - drop <[list]> <context.location>
         # Player zerstört Block
@@ -237,23 +237,23 @@ CropFarm:
         - if <context.location.material.age> == <context.location.material.maximum_age>:
                 - choose <context.location.material.name>:
                     - case potatoes:
-                        - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Farming.MaxDrop]>]>
+                        - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.MaxDrop]>]>
                         - drop <item[potato]> <context.location> quantity:<[drop]>
                         - run EXPCROP_Wheat
                     - case carrots:
-                        - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Farming.MaxDrop]>]>
+                        - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.MaxDrop]>]>
                         - drop <item[carrot]> <context.location> quantity:<[drop]>
                         - run EXPCROP_Wheat
                     - case wheat:
-                        - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Farming.MaxDrop]>]>
+                        - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.MaxDrop]>]>
                         - drop <item[wheat]> <context.location> quantity:<[drop]>
                         - run EXPCROP_Wheat
                     - case beetroots:
-                        - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Farming.MaxDrop]>]>
+                        - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.MaxDrop]>]>
                         - drop <item[beetroot]> <context.location> quantity:<[drop]>
                         - run EXPCROP_Wheat
                     - case cocoa:
-                        - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Farming.MaxDrop]>]>
+                        - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.MaxDrop]>]>
                         - drop <item[cocoa_beans]> <context.location> quantity:<[drop]>
                         - run EXPCROP_Wheat
         # Crop hat nicht die maximale größe
@@ -267,7 +267,7 @@ CropFarm:
                     - define xpliste 0
                     - repeat <[drop]>:
                         # level berechnung
-                        - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level].add[2]>]>
+                        - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level].add[2]>]>
                         # Größen berechnung
                         - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -302,7 +302,7 @@ CropFarm:
                         - define list <[list].include[<[item]>]>
                         - define xpliste:+:<[xp]>
                     - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                    - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                    - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                     - determine <[list]>
                 - case pumpkin:
                     - define drop 1
@@ -311,7 +311,7 @@ CropFarm:
                     - define xpliste 0
                     - repeat <[drop]>:
                         # level berechnung
-                        - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Farming.Level].add[2]>]>
+                        - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Farming.Level].add[2]>]>
                         # Größen berechnung
                         - define cropsize <[lvl].mul[2]>
                         # chancen berechnung
@@ -346,7 +346,7 @@ CropFarm:
                         - define list <[list].include[<[item]>]>
                         - define xpliste:+:<[xp]>
                     - toast "Farming +<[xpliste]> Exp" icon:iron_hoe targets:<player>
-                    - flag <player> Profil.Skills.Farming.Exp:+:<[xpliste]>
+                    - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:<[xpliste]>
                     - determine <[list]>
                 - case potatoes:
                     - drop <item[potato]> <context.location> quantity:1
@@ -361,5 +361,5 @@ CropFarm:
 EXPCROP_Wheat:
     type: task
     script:
-    - flag <player> Profil.Skills.Farming.Exp:+:10
-    - actionbar "Farming: +10 Exp <player.flag[Profil.Skills.Farming.Exp]>/<player.flag[Profil.Skills.Farming.Target]>"
+    - flag <player> <player.flag[Profil]>.Skills.Farming.Exp:+:10
+    - actionbar "Farming: +10 Exp <player.flag[<player.flag[Profil]>.Skills.Farming.Exp]>/<player.flag[<player.flag[Profil]>.Skills.Farming.Target]>"

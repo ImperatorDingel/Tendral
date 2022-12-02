@@ -13,7 +13,7 @@ FishingFarm:
         # Fischnamen gebung
         - if <context.item> == <item[cod]>:
             # TODO: Item Scripts für Fische
-            # TODO: Käsekuchen 2
+            # TODO: Drop System auf neues Profil System umlegen
             - random:
                 - define name Karpfen
                 - define name Flussbarsch

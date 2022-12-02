@@ -72,43 +72,43 @@ CombatLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Skills.Combat.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Combat.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Combat.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Combat.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Skills.Combat.Level:++
-          - flag <[p]> Profil.Skills.Combat.Exp:-:<[p].flag[Profil.Skills.Combat.Target]>
-          - flag <[p]> Profil.Skills.Combat.Target:*:1.15
-          - flag <[p]> Profil.Stats.Dmg:++
-          - toast "<gold><bold>Level erhöht von <script[German_Combat].data_key[Combat_<[p].flag[Profil.Skills.Combat.Level].sub[1]>]> zu <script[German_Combat].data_key[Combat_<[p].flag[Profil.Skills.Combat.Level]>]>" icon:iron_sword targets:<[p]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Combat.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Skills.Combat.Exp:-:<[p].flag[<[p].flag[Profil]>.Skills.Combat.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Combat.Target:*:1.25
+          - flag <[p]> <[p].flag[Profil]>.Stats.Dmg:++
+          - toast "<gold><bold>Level erhöht von <script[German_Combat].data_key[Combat_<[p].flag[<[p].flag[Profil]>.Skills.Combat.Level].sub[1]>]> zu <script[German_Combat].data_key[Combat_<[p].flag[<[p].flag[Profil]>.Skills.Combat.Level]>]>" icon:iron_sword targets:<[p]>
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 CombatXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Skills.Combat.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Combat.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Combat.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Combat.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> CombatProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.CombatProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[CombatProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.CombatProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[CombatProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.CombatProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-        - flag <[p]> Profil.ExpBar.Combat:<[list].unseparated>
+        - flag <[p]> <[p].flag[Profil]>.ExpBar.Combat:<[list].unseparated>

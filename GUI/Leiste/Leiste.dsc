@@ -10,7 +10,7 @@ Leiste:
         on player clicks RucksackItem in inventory:
         - if <context.slot> == 8:
             - determine passively cancelled
-            - inventory open d:<player.flag[Profil.Rucksack]>
+            - inventory open d:<player.flag[<player.flag[Profil]>.Rucksack]>
             - determine cancelled
         on player drags in player.inventory:
         - if <context.slot> == 8:

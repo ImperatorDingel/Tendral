@@ -71,44 +71,44 @@ FarmingLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Skills.Farming.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Farming.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Farming.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Farming.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Skills.Farming.Level:++
-          - flag <[p]> Profil.Skills.Farming.Exp:-:<[p].flag[Profil.Skills.Farming.Target]>
-          - flag <[p]> Profil.Skills.Farming.Target:*:2
-          - flag <[p]> Profil.Skills.Farming.MaxDrop:++
-          - flag <[p]> Profil.Stats.Leben:++
-          - toast "<gold><bold>Level erhöht von <script[German_Farming].data_key[Farming_<[p].flag[Profil.Skills.Farming.Level].sub[1]>]> zu <script[German_Farming].data_key[Farming_<[p].flag[Profil.Skills.Farming.Level]>]>" icon:iron_hoe targets:<[p]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Farming.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Skills.Farming.Exp:-:<[p].flag[<[p].flag[Profil]>.Skills.Farming.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Farming.Target:*:1.25
+          - flag <[p]> <[p].flag[Profil]>.Skills.Farming.MaxDrop:++
+          - flag <[p]> <[p].flag[Profil]>.Stats.Leben:++
+          - toast "<gold><bold>Level erhöht von <script[German_Farming].data_key[Farming_<[p].flag[<[p].flag[Profil]>.Skills.Farming.Level].sub[1]>]> zu <script[German_Farming].data_key[Farming_<[p].flag[<[p].flag[Profil]>.Skills.Farming.Level]>]>" icon:iron_hoe targets:<[p]>
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 FarmingXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Skills.Farming.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Farming.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Farming.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Farming.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> FarmingProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.FarmingProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[FarmingProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.FarmingProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[FarmingProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.FarmingProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-          - flag <[p]> Profil.ExpBar.Farming:<[list].unseparated>
+          - flag <[p]> <[p].flag[Profil]>.ExpBar.Farming:<[list].unseparated>

@@ -2,6 +2,7 @@ MinerFarm:
     type: world
     events:
         after player breaks block:
+        # TODO: Drop System auf neues Profil System umlegen
         - choose <context.material.name>:
             - case stone:
                 - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Mining.MaxDrop]>]>

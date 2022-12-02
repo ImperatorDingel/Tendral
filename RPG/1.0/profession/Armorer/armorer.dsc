@@ -71,42 +71,42 @@ ArmorerLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Professions.Armorer.Exp]>
-        - define exptarget <[p].flag[Profil.Professions.Armorer.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Professions.Armorer.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Professions.Armorer.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Professions.Armorer.Level:++
-          - flag <[p]> Profil.Professions.Armorer.Exp:-:<[p].flag[Profil.Professions.Armorer.Target]>
-          - flag <[p]> Profil.Professions.Armorer.Target:*:2
-          - narrate targets:<[p]> "<green><bold><script[Armorer].data_key[Armorer_<[p].flag[Profil.Professions.Armorer.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Armorer].data_key[Armorer_<[p].flag[Profil.Professions.Armorer.Level]>]>" per_player
+          - flag <[p]> <[p].flag[Profil]>.Professions.Armorer.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Professions.Armorer.Exp:-:<[p].flag[<[p].flag[Profil]>.Professions.Armorer.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Professions.Armorer.Target:*:2
+          - narrate targets:<[p]> "<green><bold><script[Armorer].data_key[Armorer_<[p].flag[<[p].flag[Profil]>.Professions.Armorer.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Armorer].data_key[Armorer_<[p].flag[<[p].flag[Profil]>.Professions.Armorer.Level]>]>" per_player
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 ArmorerXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Professions.Armorer.Exp]>
-        - define exptarget <[p].flag[Profil.Professions.Armorer.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Professions.Armorer.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Professions.Armorer.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> ArmorerProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.ArmorerProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[ArmorerProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.ArmorerProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[ArmorerProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.ArmorerProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-          - flag <[p]> Profil.ExpBar.Armorer:<[list].unseparated>
+          - flag <[p]> <[p].flag[Profil]>.ExpBar.Armorer:<[list].unseparated>
