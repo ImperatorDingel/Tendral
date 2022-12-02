@@ -3,7 +3,7 @@ FishingFarm:
     events:
         on player fishes while CAUGHT_FISH:
         # Level Random
-        - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Fishing.Level].add[2]>]>
+        - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Fishing.Level].add[2]>]>
         # Base Fischgröße
         - define basesize 20
         # Fischgröße
@@ -13,7 +13,6 @@ FishingFarm:
         # Fischnamen gebung
         - if <context.item> == <item[cod]>:
             # TODO: Item Scripts für Fische
-            # TODO: Drop System auf neues Profil System umlegen
             - random:
                 - define name Karpfen
                 - define name Flussbarsch
@@ -71,7 +70,7 @@ FishingFarm:
         - if <item[cod]>||<item[salmon]>||<item[tropical_fish]>||<item[pufferfish]> contains <context.item>:
             - define item <context.item.with_map[<[Info]>].with_flag[Preis:<[prize]>]>
             - determine passively caught:<[item]>
-            - flag <player> Profil.Skills.Fishing.Exp:+:<[xp]>
+            - flag <player> <player.flag[Profil]>.Skills.Fishing.Exp:+:<[xp]>
             - actionbar "Fishing +<[xp]> Exp " targets:<player>
             - toast "Fishing +<[xp]> Exp" icon:fishing_rod targets:<player>
         - else:

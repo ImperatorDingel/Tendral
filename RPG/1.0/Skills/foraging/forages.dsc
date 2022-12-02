@@ -5,7 +5,7 @@ ForagesFarm:
         # TODO: Drop System auf neues Profil System umlegen
         - choose <context.material.name>:
             - case oak_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Oak Log"
@@ -28,12 +28,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[oak_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case spruce_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Spruce Log"
@@ -56,12 +56,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[spruce_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case birch_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Birch Log"
@@ -84,12 +84,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[birch_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case jungle_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Jungle Log"
@@ -112,12 +112,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[jungle_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case acacia_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Acacia Log"
@@ -140,12 +140,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[acacia_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case dark_oak_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Dark Oak Log"
@@ -168,12 +168,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[dark_oak_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case mangrove_log:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Mangrove Log"
@@ -196,12 +196,12 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[mangrove_log].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case bamboo:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - define Preis 50
                 - define chance <util.random.int[1].to[100]>
                 - define name "Bamboo"
@@ -224,41 +224,41 @@ ForagesFarm:
                     - "<gold><bold>۞ Preis:"
                     - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
                 - define item <item[bamboo].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> Profil.Skills.Foraging.Exp:+:<[xp]>
+                - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:<[xp]>
                 - actionbar "Foraging +<[xp]> Exp " targets:<player>
                 - toast "Foraging +<[xp]> Exp" icon:iron_axe targets:<player>
                 - determine <[item]>
             - case mangrove_roots:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[mangrove_roots]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case brown_mushroom:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[brown_mushroom]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case red_mushroom:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[red_mushroom]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case brown_mushroom_block:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[brown_mushroom_block]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case red_mushroom_block:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[red_mushroom_block]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case mushroom_stem:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[mushroom_stem]> <context.location> quantity:<[drop]>
                 - run EXPForages
             - case mangrove_propagule:
-                - define drop <util.random.int[1].to[<player.flag[Profil.Skills.Foraging.MaxDrop]>]>
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Foraging.MaxDrop]>]>
                 - drop <item[mangrove_propagule]> <context.location> quantity:<[drop]>
                 - run EXPForages
 
 EXPForages:
     type: task
     script:
-    - flag <player> Profil.Skills.Foraging.Exp:+:10
-    - actionbar "Foraging: +10 Exp <player.flag[Profil.Skills.Foraging.Exp]>/<player.flag[Profil.Skills.Foraging.Target]>"
+    - flag <player> <player.flag[Profil]>.Skills.Foraging.Exp:+:10
+    - actionbar "Foraging: +10 Exp <player.flag[<player.flag[Profil]>.Skills.Foraging.Exp]>/<player.flag[<player.flag[Profil]>.Skills.Foraging.Target]>"
