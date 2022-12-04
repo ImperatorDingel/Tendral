@@ -1,5 +1,6 @@
 CropFarm:
     type: world
+    debug: false
     events:
         #Farm Skill on level 5 right clicking crops
         after player right clicks block:

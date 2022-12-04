@@ -41,130 +41,114 @@ MinerFarm:
                 - actionbar "Miner: +1 Exp <player.flag[Profil.Skills.Mining.Exp]>/<player.flag[Profil.Skills.Mining.Target]>"
             # Erze type Stone
             - case coal_ore:
-                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
-                - define list <list>
-                - define xp:0
-                - repeat <[drop]>:
-                    - define name Coal
-                    - define Preis:10
-                    - define xp:+:10
+                - if <player.item_in_hand.flag[break_power]> >= 1:
+                    - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
+                    - define list <list>
+                    - define xp:0
+                    - repeat <[drop]>:
+                        - define name Coal
+                        - define Preis:10
+                        - define xp:+:10
+                        - definemap Info:
+                            display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                            lore:
+                            - "<gold><bold>۞"
+                            - "<gold><bold>۞ Preis:"
+                            - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                        - define item <item[coal].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                        - define list <[list].include[<[item]>]>
+                    - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                    - actionbar "Mining +<[xp]> Exp " targets:<player>
+                    - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                    - determine <[list]>
+                - else:
+                    - narrate "Du kannst diesen Block nicht abbauen."
+                    - determine cancelled
+            - case iron_ore:
+                - if <player.item_in_hand.flag[break_power]> >= 1:
+                    - define chance <util.random.int[1].to[100]>
+                    - define xp 0
+                    - if <[chance]> < 50:
+                        - define item <item[tin_raw_ore]>
+                        - define xp 10
+                    - if <[chance]> >= 50:
+                        - define item <item[little_tin_raw_ore]>
+                        - define xp 12
+                    - if <[chance]> >= 75:
+                        - define item <item[middle_tin_raw_ore]>
+                        - define xp 15
+                    - if <[chance]> >= 95:
+                        - define item <item[big_tin_raw_ore]>
+                        - define xp 20
+                    - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                    - actionbar "Mining +<[xp]> Exp " targets:<player>
+                    - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                    - determine <[item]>
+                - else:
+                    - narrate "Du kannst diesen Block nicht abbauen."
+                    - determine cancelled
+            - case copper_ore:
+                - if <player.item_in_hand.flag[break_power]> >= 1:
+                    - define chance <util.random.int[1].to[100]>
+                    - define xp 0
+                    - if <[chance]> < 50:
+                        - define item <item[copper_raw_ore]>
+                        - define xp 10
+                    - if <[chance]> >= 50:
+                        - define item <item[little_copper_raw_ore]>
+                        - define xp 12
+                    - if <[chance]> >= 75:
+                        - define item <item[middle_copper_raw_ore]>
+                        - define xp 15
+                    - if <[chance]> >= 95:
+                        - define item <item[big_copper_raw_ore]>
+                        - define xp 20
+                    - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                    - actionbar "Mining +<[xp]> Exp " targets:<player>
+                    - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                    - determine <[item]>
+                - else:
+                    - narrate "Du kannst diesen Block nicht abbauen."
+                    - determine cancelled
+            - case gold_ore:
+                - if <player.item_in_hand.flag[break_power]> >= 2:
+                    - define Preis 25
+                    - define chance <util.random.int[1].to[100]>
+                    - define name "Eisenvorkommen"
+                    - define xp 0
+                    - if <[chance]> < 50:
+                        - define rare <empty>
+                        - define size <empty>
+                        - define xp 10
+                    - if <[chance]> >= 50:
+                        - define rare <gold><bold>[<gold>★<bold>]<&sp>
+                        - define Preis <[Preis].add[2]>
+                        - define size <gold><bold>Kleines<&sp>
+                        - define xp 12
+                    - if <[chance]> >= 75:
+                        - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
+                        - define Preis <[Preis].add[4]>
+                        - define size <gold><bold>Mittleres<&sp>
+                        - define xp 15
+                    - if <[chance]> >= 95:
+                        - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
+                        - define Preis <[Preis].add[15]>
+                        - define size <gold><bold>Großes<&sp>
+                        - define xp 20
                     - definemap Info:
-                        display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                        display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
                         lore:
                         - "<gold><bold>۞"
                         - "<gold><bold>۞ Preis:"
                         - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
-                    - define item <item[coal].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                    - define list <[list].include[<[item]>]>
-                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
-                - actionbar "Mining +<[xp]> Exp " targets:<player>
-                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
-                - determine <[list]>
-            - case iron_ore:
-                - define Preis 20
-                - define chance <util.random.int[1].to[100]>
-                - define name "Tinvorkommen"
-                - define xp 0
-                - if <[chance]> < 50:
-                    - define rare <empty>
-                    - define size <empty>
-                    - define xp 10
-                - if <[chance]> >= 50:
-                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
-                    - define Preis <[Preis].add[2]>
-                    - define size <gold><bold>Kleines<&sp>
-                    - define xp 12
-                - if <[chance]> >= 75:
-                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[4]>
-                    - define size <gold><bold>Mittleres<&sp>
-                    - define xp 15
-                - if <[chance]> >= 95:
-                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[15]>
-                    - define size <gold><bold>Großes<&sp>
-                    - define xp 20
-                - definemap Info:
-                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
-                    lore:
-                    - "<gold><bold>۞"
-                    - "<gold><bold>۞ Preis:"
-                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
-                - define item <item[raw_iron].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
-                - actionbar "Mining +<[xp]> Exp " targets:<player>
-                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
-                - determine <[item]>
-            - case copper_ore:
-                - define Preis 20
-                - define chance <util.random.int[1].to[100]>
-                - define name "Kupfervorkommen"
-                - define xp 0
-                - if <[chance]> < 50:
-                    - define rare <empty>
-                    - define size <empty>
-                    - define xp 10
-                - if <[chance]> >= 50:
-                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
-                    - define Preis <[Preis].add[2]>
-                    - define size <gold><bold>Kleines<&sp>
-                    - define xp 12
-                - if <[chance]> >= 75:
-                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[4]>
-                    - define size <gold><bold>Mittleres<&sp>
-                    - define xp 15
-                - if <[chance]> >= 95:
-                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[15]>
-                    - define size <gold><bold>Großes<&sp>
-                    - define xp 20
-                - definemap Info:
-                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
-                    lore:
-                    - "<gold><bold>۞"
-                    - "<gold><bold>۞ Preis:"
-                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
-                - define item <item[raw_copper].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
-                - actionbar "Mining +<[xp]> Exp " targets:<player>
-                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
-                - determine <[item]>
-            - case gold_ore:
-                - define Preis 25
-                - define chance <util.random.int[1].to[100]>
-                - define name "Eisenvorkommen"
-                - define xp 0
-                - if <[chance]> < 50:
-                    - define rare <empty>
-                    - define size <empty>
-                    - define xp 10
-                - if <[chance]> >= 50:
-                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
-                    - define Preis <[Preis].add[2]>
-                    - define size <gold><bold>Kleines<&sp>
-                    - define xp 12
-                - if <[chance]> >= 75:
-                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[4]>
-                    - define size <gold><bold>Mittleres<&sp>
-                    - define xp 15
-                - if <[chance]> >= 95:
-                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
-                    - define Preis <[Preis].add[15]>
-                    - define size <gold><bold>Großes<&sp>
-                    - define xp 20
-                - definemap Info:
-                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
-                    lore:
-                    - "<gold><bold>۞"
-                    - "<gold><bold>۞ Preis:"
-                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
-                - define item <item[raw_iron].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
-                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
-                - actionbar "Mining +<[xp]> Exp " targets:<player>
-                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
-                - determine <[item]>
+                    - define item <item[raw_iron].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                    - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                    - actionbar "Mining +<[xp]> Exp " targets:<player>
+                    - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                    - determine <[item]>
+                - else:
+                    - narrate "Du kannst diesen Block nicht abbauen."
+                    - determine cancelled
             - case redstone_ore:
                 - define Preis 30
                 - define chance <util.random.int[1].to[100]>
@@ -305,4 +289,229 @@ MinerFarm:
                 - actionbar "Mining +<[xp]> Exp " targets:<player>
                 - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
                 - determine <[item]>
+            - case deepslate_coal_ore:
+                - define Preis 20
+                - define chance <util.random.int[1].to[100]>
+                - define name "Schwarzeisenvorkommen"
+                - define xp 0
+                - if <[chance]> < 50:
+                    - define rare <empty>
+                    - define size <empty>
+                    - define xp 10
+                - if <[chance]> >= 50:
+                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
+                    - define Preis <[Preis].add[2]>
+                    - define size <gold><bold>Kleines<&sp>
+                    - define xp 12
+                - if <[chance]> >= 75:
+                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[4]>
+                    - define size <gold><bold>Mittleres<&sp>
+                    - define xp 15
+                - if <[chance]> >= 95:
+                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[15]>
+                    - define size <gold><bold>Großes<&sp>
+                    - define xp 20
+                - definemap Info:
+                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
+                    lore:
+                    - "<gold><bold>۞"
+                    - "<gold><bold>۞ Preis:"
+                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                - define item <item[raw_copper].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[item]>
+            - case deepslate_iron_ore:
+                - define Preis 20
+                - define chance <util.random.int[1].to[100]>
+                - define name "Silbervorkommen"
+                - define xp 0
+                - if <[chance]> < 50:
+                    - define rare <empty>
+                    - define size <empty>
+                    - define xp 10
+                - if <[chance]> >= 50:
+                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
+                    - define Preis <[Preis].add[2]>
+                    - define size <gold><bold>Kleines<&sp>
+                    - define xp 12
+                - if <[chance]> >= 75:
+                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[4]>
+                    - define size <gold><bold>Mittleres<&sp>
+                    - define xp 15
+                - if <[chance]> >= 95:
+                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[15]>
+                    - define size <gold><bold>Großes<&sp>
+                    - define xp 20
+                - definemap Info:
+                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
+                    lore:
+                    - "<gold><bold>۞"
+                    - "<gold><bold>۞ Preis:"
+                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                - define item <item[raw_copper].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[item]>
+            - case deepslate_copper_ore:
+                - define Preis 20
+                - define chance <util.random.int[1].to[100]>
+                - define name "Goldvorkommen"
+                - define xp 0
+                - if <[chance]> < 50:
+                    - define rare <empty>
+                    - define size <empty>
+                    - define xp 10
+                - if <[chance]> >= 50:
+                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
+                    - define Preis <[Preis].add[2]>
+                    - define size <gold><bold>Kleines<&sp>
+                    - define xp 12
+                - if <[chance]> >= 75:
+                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[4]>
+                    - define size <gold><bold>Mittleres<&sp>
+                    - define xp 15
+                - if <[chance]> >= 95:
+                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[15]>
+                    - define size <gold><bold>Großes<&sp>
+                    - define xp 20
+                - definemap Info:
+                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
+                    lore:
+                    - "<gold><bold>۞"
+                    - "<gold><bold>۞ Preis:"
+                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                - define item <item[raw_copper].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[item]>
+            # TODO: Rubine droppen lassen mit Dropchance
+            - case deepslate_gold_ore:
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
+                - define list <list>
+                - define xp:0
+                - repeat <[drop]>:
+                    - define name Rubin
+                    - define Preis:25
+                    - define xp:+:22
+                    - definemap Info:
+                        display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                        lore:
+                        - "<gold><bold>۞"
+                        - "<gold><bold>۞ Preis:"
+                        - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                    - define item <item[emerald].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                    - define list <[list].include[<[item]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[list]>
+            # TODO: Redstone per dropchance droppen lassen
+            - case deepslate_redstone_ore:
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
+                - define list <list>
+                - define xp:0
+                - repeat <[drop]>:
+                    - define name Redstone
+                    - define Preis:5
+                    - define xp:+:10
+                    - definemap Info:
+                        display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                        lore:
+                        - "<gold><bold>۞"
+                        - "<gold><bold>۞ Preis:"
+                        - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                    - define item <item[redstone].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                    - define list <[list].include[<[item]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[list]>
+            # TODO: Emerald per dropchance droppen lassen
+            - case deepslate_emerald_ore:
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
+                - define list <list>
+                - define xp:0
+                - repeat <[drop]>:
+                    - define name Emerald
+                    - define Preis:30
+                    - define xp:+:30
+                    - definemap Info:
+                        display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                        lore:
+                        - "<gold><bold>۞"
+                        - "<gold><bold>۞ Preis:"
+                        - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                    - define item <item[emerald].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                    - define list <[list].include[<[item]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[list]>
+            - case deepslate_lapis_ore:
+                - define Preis 20
+                - define chance <util.random.int[1].to[100]>
+                - define name "Bluteisenvorkommen"
+                - define xp 0
+                - if <[chance]> < 50:
+                    - define rare <empty>
+                    - define size <empty>
+                    - define xp 10
+                - if <[chance]> >= 50:
+                    - define rare <gold><bold>[<gold>★<bold>]<&sp>
+                    - define Preis <[Preis].add[2]>
+                    - define size <gold><bold>Kleines<&sp>
+                    - define xp 12
+                - if <[chance]> >= 75:
+                    - define rare <gold><bold>[<gray>★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[4]>
+                    - define size <gold><bold>Mittleres<&sp>
+                    - define xp 15
+                - if <[chance]> >= 95:
+                    - define rare <gold><bold>[<yellow>★★★<gold><bold>]<&sp>
+                    - define Preis <[Preis].add[15]>
+                    - define size <gold><bold>Großes<&sp>
+                    - define xp 20
+                - definemap Info:
+                    display_name: "<gold><bold>۞ <[size]><[name]> <[rare]><gold><bold>۞"
+                    lore:
+                    - "<gold><bold>۞"
+                    - "<gold><bold>۞ Preis:"
+                    - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                - define item <item[raw_copper].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[item]>
+            # TODO: Diamond per dropchance droppen lassen
+            - case deepslate_diamond_ore:
+                - define drop <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Mining.MaxDrop]>]>
+                - define list <list>
+                - define xp:0
+                - repeat <[drop]>:
+                    - define name Diamond
+                    - define Preis:100
+                    - define xp:+:50
+                    - definemap Info:
+                        display_name: "<gold><bold>۞ <[name]> <gold><bold>۞"
+                        lore:
+                        - "<gold><bold>۞"
+                        - "<gold><bold>۞ Preis:"
+                        - "<gold><bold>۞ <[Preis].proc[Economy_Tendral_proc2]>"
+                    - define item <item[diamond].with_map[<[Info]>].with_flag[Preis:<[Preis]>]>
+                    - define list <[list].include[<[item]>]>
+                - flag <player> <player.flag[Profil]>.Skills.Mining.Exp:+:<[xp]>
+                - actionbar "Mining +<[xp]> Exp " targets:<player>
+                - toast "Mining +<[xp]> Exp" icon:iron_pickaxe targets:<player>
+                - determine <[list]>
+
 
