@@ -16,10 +16,9 @@
 <br/>
 
 used code in this Repo:
->[Metric_number](https://forum.denizenscript.com/threads/metric-number.541/): (c)Hydroxycobalamin <br/>
->[dTab](https://forum.denizenscript.com/threads/dtab.405/): (c)apademide
-<br/>
-<br/>
+>[Tendral](https://github.com/ImperatorDingel/Tendral/tree/main): (c)JustDingel<br/>
+>[Metric_number](https://forum.denizenscript.com/threads/metric-number.541/): (c)Hydroxycobalamin<br/>
+>[dTab](https://forum.denizenscript.com/threads/dtab.405/): (c)apademide<br/>
 <br/>
 <br/>
 Copyright (c) 2020-2022 JustDingel<br/>
