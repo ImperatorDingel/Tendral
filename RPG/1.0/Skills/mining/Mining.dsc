@@ -71,44 +71,44 @@ MiningLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Skills.Mining.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Mining.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Mining.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Mining.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Skills.Mining.Level:++
-          - flag <[p]> Profil.Skills.Mining.Exp:-:<[p].flag[Profil.Skills.Mining.Target]>
-          - flag <[p]> Profil.Skills.Mining.Target:*:2
-          - flag <[p]> Profil.Skills.Mining.MaxDrop:++
-          - flag <[p]> Profil.Stats.Def:++
-          - narrate targets:<[p]> "<green><bold><script[Mining].data_key[Mining_<[p].flag[Profil.Skills.Mining.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Mining].data_key[Mining_<[p].flag[Profil.Skills.Mining.Level]>]>" per_player
+          - flag <[p]> <[p].flag[Profil]>.Skills.Mining.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Skills.Mining.Exp:-:<[p].flag[<[p].flag[Profil]>.Skills.Mining.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Mining.Target:*:1.25
+          - flag <[p]> <[p].flag[Profil]>.Skills.Mining.MaxDrop:++
+          - flag <[p]> <[p].flag[Profil]>.Stats.Def:++
+          - narrate targets:<[p]> "<green><bold><script[Mining].data_key[Mining_<[p].flag[<[p].flag[Profil]>.Skills.Mining.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Mining].data_key[Mining_<[p].flag[Profil.Skills.Mining.Level]>]>" per_player
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 MiningXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Skills.Mining.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Mining.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Mining.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Mining.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> MiningProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.MiningProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[MiningProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.MiningProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[MiningProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.MiningProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-          - flag <[p]> Profil.ExpBar.Mining:<[list].unseparated>
+          - flag <[p]> <[p].flag[Profil]>.ExpBar.Mining:<[list].unseparated>

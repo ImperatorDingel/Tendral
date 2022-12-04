@@ -1,0 +1,3 @@
+smithing:
+    type: world
+    events:

@@ -71,43 +71,43 @@ FishingLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Skills.Fishing.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Fishing.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Fishing.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Fishing.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Skills.Fishing.Level:++
-          - flag <[p]> Profil.Skills.Fishing.Exp:-:<[p].flag[Profil.Skills.Fishing.Target]>
-          - flag <[p]> Profil.Skills.Fishing.Target:*:1.15
-          - flag <[p]> Profil.Stats.Speed:++
-          - toast "<gold><bold>Level up:<n><script[German_Fishing].data_key[Fishing_<[p].flag[Profil.Skills.Fishing.Level].sub[1]>]> -> <script[German_Fishing].data_key[Fishing_<[p].flag[Profil.Skills.Fishing.Level]>]>" icon:fishing_rod targets:<[p]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Fishing.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Skills.Fishing.Exp:-:<[p].flag[<[p].flag[Profil]>.Skills.Fishing.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Fishing.Target:*:1.25
+          - flag <[p]> <[p].flag[Profil]>.Stats.Speed:++
+          - toast "<gold><bold>Level up:<n><script[German_Fishing].data_key[Fishing_<[p].flag[<[p].flag[Profil]>.Skills.Fishing.Level].sub[1]>]> -> <script[German_Fishing].data_key[Fishing_<[p].flag[<[p].flag[Profil]>.Skills.Fishing.Level]>]>" icon:fishing_rod targets:<[p]>
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 FishingXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Skills.Fishing.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Fishing.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Fishing.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Fishing.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> FishingProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.FishingProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[FishingProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.FishingProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[FishingProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.FishingProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-          - flag <[p]> Profil.ExpBar.Fishing:<[list].unseparated>
+          - flag <[p]> <[p].flag[Profil]>.ExpBar.Fishing:<[list].unseparated>

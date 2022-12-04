@@ -3,7 +3,7 @@ FishingFarm:
     events:
         on player fishes while CAUGHT_FISH:
         # Level Random
-        - define lvl <util.random.int[1].to[<player.flag[Profil.Skills.Fishing.Level].add[2]>]>
+        - define lvl <util.random.int[1].to[<player.flag[<player.flag[Profil]>.Skills.Fishing.Level].add[2]>]>
         # Base Fischgröße
         - define basesize 20
         # Fischgröße
@@ -70,7 +70,7 @@ FishingFarm:
         - if <item[cod]>||<item[salmon]>||<item[tropical_fish]>||<item[pufferfish]> contains <context.item>:
             - define item <context.item.with_map[<[Info]>].with_flag[Preis:<[prize]>]>
             - determine passively caught:<[item]>
-            - flag <player> Profil.Skills.Fishing.Exp:+:<[xp]>
+            - flag <player> <player.flag[Profil]>.Skills.Fishing.Exp:+:<[xp]>
             - actionbar "Fishing +<[xp]> Exp " targets:<player>
             - toast "Fishing +<[xp]> Exp" icon:fishing_rod targets:<player>
         - else:
@@ -87,8 +87,8 @@ metric_number2:
     - define length <[number].abs.log[10].round>
     - foreach <script.data_key[data]> key:div as:suffix:
         - if <[length]> >= <[div].length.sub[1]>:
-            - determine <[number].div[<[div]>].round_to[2]><&sp><[suffix]>
-    - determine <[number]>
+            - determine <[number].div[<[div]>].round_to[2]><[suffix]>
+    - determine <[number].div[1000].round_to[2]>kg
 #Cm -> M umrechnung Metric
 metric_number3:
     type: procedure

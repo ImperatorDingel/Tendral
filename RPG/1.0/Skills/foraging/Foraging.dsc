@@ -71,44 +71,44 @@ ForagingLevel:
     debug: false
     script:
       - stop if:<server.online_players.is_empty>
-      - foreach <server.online_players> as:p:
-        - define exp <[p].flag[Profil.Skills.Foraging.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Foraging.Target]>
+      - foreach <server.online_players_flagged[Profil]> as:p:
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Foraging.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Foraging.Target]>
         - if <[Exp]> >= <[exptarget]>:
-          - flag <[p]> Profil.Skills.Foraging.Level:++
-          - flag <[p]> Profil.Skills.Foraging.Exp:-:<[p].flag[Profil.Skills.Foraging.Target]>
-          - flag <[p]> Profil.Skills.Foraging.Target:*:2
-          - flag <[p]> Profil.Skills.Foraging.MaxDrop:++
-          - flag <[p]> Profil.Stats.ManaMax:++
-          - narrate targets:<[p]> "<green><bold><script[Foraging].data_key[Foraging_<[p].flag[Profil.Skills.Foraging.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Foraging].data_key[Foraging_<[p].flag[Profil.Skills.Foraging.Level]>]>" per_player
+          - flag <[p]> <[p].flag[Profil]>.Skills.Foraging.Level:++
+          - flag <[p]> <[p].flag[Profil]>.Skills.Foraging.Exp:-:<[p].flag[<[p].flag[Profil]>.Skills.Foraging.Target]>
+          - flag <[p]> <[p].flag[Profil]>.Skills.Foraging.Target:*:1.25
+          - flag <[p]> <[p].flag[Profil]>.Skills.Foraging.MaxDrop:++
+          - flag <[p]> <[p].flag[Profil]>.Stats.ManaMax:++
+          - narrate targets:<[p]> "<green><bold><script[Foraging].data_key[Foraging_<[p].flag[<[p].flag[Profil]>.Skills.Foraging.Level].sub[1]>]> erhöhte sich auf <green><bold><script[Foraging].data_key[Foraging_<[p].flag[Profil.Skills.Foraging.Level]>]>" per_player
           - playsound <[p]> sound:ENTITY_PLAYER_LEVELUP volume:1.0 pitch:0.6
 
 ForagingXPBar:
     type: task
     debug: false
     script:
-    - foreach <server.online_players> as:p:
+    - foreach <server.online_players_flagged[Profil]> as:p:
         - define list <list>
         - define zahl 0
-        - define exp <[p].flag[Profil.Skills.Foraging.Exp]>
-        - define exptarget <[p].flag[Profil.Skills.Foraging.Target]>
+        - define exp <[p].flag[<[p].flag[Profil]>.Skills.Foraging.Exp]>
+        - define exptarget <[p].flag[<[p].flag[Profil]>.Skills.Foraging.Target]>
         - define raw <[exp].div[<[exptarget]>]>
         - define Prozent <[raw].mul[100].format_number[##.##]>
-        - flag <[p]> ForagingProzent:<[Prozent]>
+        - flag <[p]> <[p].flag[Profil]>.ExpProzent.ForagingProzent:<[Prozent]>
         - repeat 20:
           - define zahl <[zahl].add[5]>
           - if <[zahl]> == 100:
-            - if <[p].flag[ForagingProzent]> >= 99:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.ForagingProzent]> >= 99:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
           - else:
-            - if <[p].flag[ForagingProzent]> >= <[zahl]>:
+            - if <[p].flag[<[p].flag[Profil]>.ExpProzent.ForagingProzent]> >= <[zahl]>:
               - define finish <green>-
               - define list <[list].include[<[finish]>]>
             - else:
               - define finish <white>-
               - define list <[list].include[<[finish]>]>
-          - flag <[p]> Profil.ExpBar.Foraging:<[list].unseparated>
+          - flag <[p]> <[p].flag[Profil]>.ExpBar.Foraging:<[list].unseparated>
