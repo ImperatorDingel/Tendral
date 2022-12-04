@@ -1,5 +1,5 @@
 <div align="center">
-    <div>Hier Banner einfügen - Dingel </div>
+    <a href=""><img src="https://fontmeme.com/permalink/221204/8fbd77fb313730251acb0ded5e284cfb.png" /></a>
     <h1>Tendral - a Minecraft Server</h1>
     <a href=""><img src="https://img.shields.io/badge/MC:-1.19.2-green" /></a>
     <a href=""><img src="https://img.shields.io/badge/Version:-Tendral--Alpha--0.0.1-red" /></a>
