@@ -13,8 +13,8 @@
     <div>Minecraft Server im Rpg Stil</div>
 </div>
 
-> used code in this Repo:
-> [Metric_number](https://github.com/Hydroxycobalamin/Denizen-Script-Collection/tree/main/scripter_utilities/metric_number): (c)Hydroxycobalamin
+used code in this Repo:
+>[Metric_number](https://github.com/Hydroxycobalamin/Denizen-Script-Collection/tree/main/scripter_utilities/metric_number): (c)Hydroxycobalamin
 
 
 Copyright (c) 2020-2022 JustDingel
