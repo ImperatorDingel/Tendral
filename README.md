@@ -14,7 +14,8 @@
 </div>
 
 used code in this Repo:
->[Metric_number](https://github.com/Hydroxycobalamin/Denizen-Script-Collection/tree/main/scripter_utilities/metric_number): (c)Hydroxycobalamin
+>[Metric_number](https://forum.denizenscript.com/threads/metric-number.541/): (c)Hydroxycobalamin
+>[dTab](https://forum.denizenscript.com/threads/dtab.405/): (c)apademide
 
 
 Copyright (c) 2020-2022 JustDingel
