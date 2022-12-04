@@ -10,7 +10,8 @@
     <a href="https://www.twitch.tv/justdingel"><img src="https://img.shields.io/badge/Twitch:-JustDingel-purple" /></a>
     <a href="https://twitter.com/JustDingel"><img src="https://img.shields.io/badge/Twitter:-JustDingel-blue" /></a>
     <br/>
-    <div>Minecraft Server im Rpg Stil</div>
+    <div>a Minecraft Server</div>
+    <div>Tendral versucht mit neuen Elementen im Vanilla Modus (ohne Mods) das Spielgeschehen zu erweitern durch unzählige RPG Elemente, Level, Stats, Erze, Waffen, Tools, Rüstung</div>
 </div>
 <br/>
 <br/>
@@ -19,7 +20,6 @@ used code in this Repo:
 >[Tendral](https://github.com/ImperatorDingel/Tendral/tree/main): (c)JustDingel<br/>
 >[Metric_number](https://forum.denizenscript.com/threads/metric-number.541/): (c)Hydroxycobalamin<br/>
 >[dTab](https://forum.denizenscript.com/threads/dtab.405/): (c)apademide<br/>
-<br/>
 <br/>
 Copyright (c) 2020-2022 JustDingel<br/>
 MIT License:<br/>
