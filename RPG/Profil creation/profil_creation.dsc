@@ -2,6 +2,7 @@ profil_creation:
     type: world
     events:
         after player joins:
+        - inventory set slot:5 o:Profil_choose_item
         - teleport <player> d:Profil_creation
         - flag <player> Profil:!
         - flag <player> Profil_auswahl:!
@@ -28,6 +29,7 @@ Profil:
     - flag <player> <player.flag[Profil]>.last_location:<player.location>
     - teleport <player> d:Profil_creation
     - inventory clear
+    - inventory set slot:5 o:Profil_choose_item
     - flag <player> Profil:!
     - flag <player> Profil_auswahl:!
     - flag <player> difficulty_auswahl:!
@@ -117,35 +119,25 @@ Profil_creation_gui_click_handler:
     type: world
     events:
         on player clicks item in Profil_creation_gui:
-        - narrate "Nice <context.slot>"
         - choose <context.slot>:
             - case 12:
-                - narrate "Nice Profil1"
                 - flag <player> Profil_auswahl:Profil1
                 - if <player.has_flag[Profil1]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui
             - case 14:
-                - narrate "Nice Profil2"
                 - flag <player> Profil_auswahl:Profil2
                 - if <player.has_flag[Profil2]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui
             - case 16:
-                - narrate "Nice Profil3"
                 - flag <player> Profil_auswahl:Profil3
                 - if <player.has_flag[Profil3]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui
