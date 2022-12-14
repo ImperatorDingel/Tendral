@@ -36,18 +36,6 @@ Profil:
     - flag <player> Race_auswahl:!
     - inventory open d:Profil_creation_gui
 
-Stats:
-    type: command
-    name: Stats
-    description: Does something
-    usage: /stats <&lt>arg<&gt>
-    permission: dscript.mycmd
-    script:
-    - narrate <player.flag[Profil]>
-    - narrate "Leben <player.flag[<player.flag[Profil]>.Level]>"
-    - narrate Hello!
-
-
 Profil_creation_gui:
     type: inventory
     inventory: chest

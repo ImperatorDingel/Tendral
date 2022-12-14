@@ -7,7 +7,7 @@ race_gui:
       zurueck: arrow[display_name=<red><bold>Zurück]
     procedural items:
     - define list <list>
-    - define Race <script[Race_Data_Gui].parsed_key[Rassenliste].as_list>
+    - define Race <script[Race_Data_Gui].parsed_key[Rassenliste]>
     - foreach <[race]>:
         - if <[value]> == weiter:
             - if <player.has_flag[Race_auswahl]>:
