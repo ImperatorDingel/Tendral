@@ -8,20 +8,39 @@ sidebar_task:
     type: task
     data:
         TopBar: ۞=====Profil=====۞
-        SideBar:
+        SideBarNormal:
         - <empty>
-        - <player.name>
+        - <gold>۞ <bold><player.name>
         - <gold>۞ <bold>Level : <yellow><bold><player.flag[<player.flag[Profil]>.Level]>
-        - <gold>۞ <green><bold>Leben: <player.health>/<player.health_max>
+        - <gold>۞ <green><bold>Leben: <player.health.round>/<player.health_max.round>
         - <gold>۞ <aqua><bold>Mana: <player.flag[<player.flag[Profil]>.Stats.Mana]>/<player.flag[<player.flag[Profil]>.Stats.ManaMax]>
         - <gold>۞ <blue><bold>Verteidigung: <bold><player.flag[<player.flag[Profil]>.Stats.Def]>
+        - <empty>
+        - <gold>۞ <yellow><bold>Gold
+        - <gold>۞ <server.economy.format[<player.flag[<player.flag[Profil]>.Economy.Money]>]>
+        SideBarHardcore:
+        - <empty>
+        - <gold>۞ <bold><player.name>
+        - <gold>۞ <bold>Level : <yellow><bold><player.flag[<player.flag[Profil]>.Level]>
+        - <gold>۞ <green><bold>Leben: <player.health.round>/<player.health_max.round>
+        - <gold>۞ <aqua><bold>Mana: <player.flag[<player.flag[Profil]>.Stats.Mana]>/<player.flag[<player.flag[Profil]>.Stats.ManaMax]>
+        - <gold>۞ <white><bold>Stamina: <player.flag[<player.flag[Profil]>.Stats.Stamina]>/<player.flag[<player.flag[Profil]>.Stats.StaminaMax]>
+        - <gold>۞ <blue><bold>Verteidigung: <bold><player.flag[<player.flag[Profil]>.Stats.Def]>
+        - <empty>
+        - <gold>۞ <yellow><bold>Gold
+        - <gold>۞ <server.economy.format[<player.flag[<player.flag[Profil]>.Economy.Money]>]>
     script:
-    - foreach <server.online_players> as:p:
-        - if <[p].has_flag[<[p].flag[Profil]>.settings.sidebar]>:
-            - sidebar set title:<gold><bold><script[sidebar_task].data_key[data.TopBar]> "values:<script[sidebar_task].parsed_key[data.Sidebar]>" players:<[p]> per_player
-        - else:
-            - determine passively cancelled
-            - sidebar remove
+    - foreach <server.online_players_flagged[Profil]> as:p:
+        - if <[p].flag[<[p].flag[Profil]>.Difficulty]> == normal:
+            - if <[p].has_flag[<[p].flag[Profil]>.settings.sidebar]>:
+                - sidebar set title:<gold><bold><script[sidebar_task].data_key[data.TopBar]> "values:<script[sidebar_task].parsed_key[data.SideBarNormal]>" players:<[p]> per_player
+            - else:
+                - sidebar remove
+        - if <[p].flag[<[p].flag[Profil]>.Difficulty]> == hardcore:
+            - if <[p].has_flag[<[p].flag[Profil]>.settings.sidebar]>:
+                - sidebar set title:<gold><bold><script[sidebar_task].data_key[data.TopBar]> "values:<script[sidebar_task].parsed_key[data.SideBarHardcore]>" players:<[p]> per_player
+            - else:
+                - sidebar remove
 
 sidebar_command:
     type: command
