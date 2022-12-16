@@ -16,7 +16,6 @@ profil_choose_gui_click_handler:
     type: world
     events:
         on player clicks item in profil_choose_gui:
-        - narrate "Nice <context.slot>"
         # 12 16 23
         - choose <context.slot>:
             - case 12:

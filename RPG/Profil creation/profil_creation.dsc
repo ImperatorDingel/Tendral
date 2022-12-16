@@ -28,6 +28,7 @@ Profil:
     - flag <player> <player.flag[Profil]>_inventory:<player.inventory.list_contents>
     - flag <player> <player.flag[Profil]>.last_location:<player.location>
     - teleport <player> d:Profil_creation
+    - sidebar remove
     - inventory clear
     - inventory set slot:5 o:Profil_choose_item
     - flag <player> Profil:!

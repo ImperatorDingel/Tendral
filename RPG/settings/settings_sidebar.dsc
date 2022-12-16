@@ -1,11 +1,13 @@
 sidebar_world_script:
     type: world
+    debug: false
     events:
         on delta time secondly every:1:
         - run sidebar_task
 
 sidebar_task:
     type: task
+    debug: false
     data:
         TopBar: ۞=====Profil=====۞
         SideBarNormal:
@@ -48,6 +50,7 @@ sidebar_command:
     description: Does something
     usage: /sidebar <&lt>arg<&gt>
     permission: dscript.mycmd
+    debug: false
     script:
     - if <player.has_flag[<player.flag[Profil]>.settings.sidebar]>:
         - flag <player> <player.flag[Profil]>.settings.sidebar:!
