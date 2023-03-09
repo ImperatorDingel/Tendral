@@ -2,6 +2,7 @@ profil_creation:
     type: world
     events:
         after player joins:
+        - inventory set slot:5 o:Profil_choose_item
         - teleport <player> d:Profil_creation
         - flag <player> Profil:!
         - flag <player> Profil_auswahl:!
@@ -27,24 +28,14 @@ Profil:
     - flag <player> <player.flag[Profil]>_inventory:<player.inventory.list_contents>
     - flag <player> <player.flag[Profil]>.last_location:<player.location>
     - teleport <player> d:Profil_creation
+    - sidebar remove
     - inventory clear
+    - inventory set slot:5 o:Profil_choose_item
     - flag <player> Profil:!
     - flag <player> Profil_auswahl:!
     - flag <player> difficulty_auswahl:!
     - flag <player> Race_auswahl:!
     - inventory open d:Profil_creation_gui
-
-Stats:
-    type: command
-    name: Stats
-    description: Does something
-    usage: /stats <&lt>arg<&gt>
-    permission: dscript.mycmd
-    script:
-    - narrate <player.flag[Profil]>
-    - narrate "Leben <player.flag[<player.flag[Profil]>.Level]>"
-    - narrate Hello!
-
 
 Profil_creation_gui:
     type: inventory
@@ -117,35 +108,25 @@ Profil_creation_gui_click_handler:
     type: world
     events:
         on player clicks item in Profil_creation_gui:
-        - narrate "Nice <context.slot>"
         - choose <context.slot>:
             - case 12:
-                - narrate "Nice Profil1"
                 - flag <player> Profil_auswahl:Profil1
                 - if <player.has_flag[Profil1]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui
             - case 14:
-                - narrate "Nice Profil2"
                 - flag <player> Profil_auswahl:Profil2
                 - if <player.has_flag[Profil2]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui
             - case 16:
-                - narrate "Nice Profil3"
                 - flag <player> Profil_auswahl:Profil3
                 - if <player.has_flag[Profil3]>:
-                    - narrate "Hello Dingel"
                     - inventory open d:profil_choose_gui
                 - else:
-                    - narrate "Dingel doof"
                     - flag <player> difficulty_auswahl:!
                     - inventory open d:difficulty_gui

@@ -10,10 +10,9 @@ Tendral_bronze_ingot:
     - <gold><bold>۞ <script[Tendral_bronze_ingot].data_key[data.price].proc[Economy_Tendral_proc2]>
     recipes:
         1:
-           # Smithing recipes take one base item and one upgrade item.
            type: smithing
            base: <item[Tendral_copper_ingot]>
-           # Optionally, choose what values to retain, as a simple pipe-separated list of parts to retain.
-           # If unspecified, no values will be retained.
-           # Parts can be: 'display', 'enchantments'
            upgrade: <item[tendral_tin_ingot]>
+        2:
+            type: shapeless
+            input: <item[Tendral_copper_ingot]>|<item[Tendral_copper_ingot]>|<item[tendral_tin_ingot]>
