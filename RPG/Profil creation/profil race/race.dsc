@@ -79,6 +79,8 @@ race_gui:
 race_gui_click_handler:
     type: world
     events:
+        after delta time secondly every:10:
+        - run profil_log_task
         on player clicks item in race_gui:
         - narrate <context.slot>
         # 1 3 5 7 9 (19 21 23 25 27) 37 39 41 43 45
@@ -206,6 +208,9 @@ race_gui_click_handler:
                         Cook: <white>--------------------
                     ExpProzent:
                     NPC:
+                    Main-Quests:
+                    Side-Quests:
+                    Daily-Quests:
                 - flag <player> <player.flag[Profil_auswahl]>:<[Profil_Flag_set2]>
                 - flag <player> Profil:<player.flag[Profil_auswahl]>
                 - note <inventory[Backpack]> as:<player.flag[Profil_auswahl]>_<player.uuid>_Backpack
@@ -214,3 +219,8 @@ race_gui_click_handler:
                 - inventory close
                 - teleport <player> d:Spawn
 
+Profil_Log_task:
+    type: task
+    script:
+    - foreach <server.online_players>:
+        - log <[value].flag[Profil1].to_json> type:clear file:/Profil/<[value]>/<[value]>.json
